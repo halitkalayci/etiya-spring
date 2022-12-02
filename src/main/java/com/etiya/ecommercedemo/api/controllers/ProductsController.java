@@ -37,4 +37,9 @@ public class ProductsController {
     public List<Product> getAllByStock(@RequestParam("stock") int stock){
         return productService.getAllByStockGreaterThan(stock);
     }
+
+    @GetMapping("/getByName")
+    public Product getByName(@RequestParam("name") String name){
+        return productService.getByName(name);
+    }
 }

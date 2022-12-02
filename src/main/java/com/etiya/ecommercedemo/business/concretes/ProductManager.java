@@ -26,4 +26,9 @@ public class ProductManager implements ProductService {
     public List<Product> getAllByStockGreaterThan(int stock) {
         return productRepository.findAllProductsByStockGreaterThanOrderByStockDesc(stock);
     }
+
+    @Override
+    public Product getByName(String name) {
+        return productRepository.findByName(name);
+    }
 }
