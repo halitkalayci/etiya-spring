@@ -4,7 +4,6 @@ import com.etiya.ecommercedemo.business.abstracts.ProductService;
 import com.etiya.ecommercedemo.entities.concretes.Product;
 import com.etiya.ecommercedemo.repository.abstracts.ProductRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,5 +20,10 @@ public class ProductManager implements ProductService {
     @Override
     public Product getById(int id) {
         return productRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public List<Product> getAllByStockGreaterThan(int stock) {
+        return productRepository.findAllProductsByStockGreaterThanOrderByStockDesc(stock);
     }
 }

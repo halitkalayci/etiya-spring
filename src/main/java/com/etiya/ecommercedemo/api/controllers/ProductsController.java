@@ -32,4 +32,9 @@ public class ProductsController {
     public Product getByIdPath(@PathVariable int id){
         return productService.getById(id);
     }
+
+    @GetMapping("/getByStockGreaterThan")
+    public List<Product> getAllByStock(@RequestParam("stock") int stock){
+        return productService.getAllByStockGreaterThan(stock);
+    }
 }
