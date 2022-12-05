@@ -2,6 +2,7 @@ package com.etiya.ecommercedemo.api.controllers;
 
 import com.etiya.ecommercedemo.business.abstracts.CategoryService;
 import com.etiya.ecommercedemo.business.dtos.request.category.AddCategoryRequest;
+import com.etiya.ecommercedemo.business.dtos.response.category.AddCategoryResponse;
 import com.etiya.ecommercedemo.core.entities.concretes.Category;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,7 +30,7 @@ public class CategoriesController {
     // AddCategoryRequest => name,type
     // ResponseEntity
     @PostMapping("/add")
-    public ResponseEntity<Category> addCategory(@RequestBody AddCategoryRequest addCategoryRequest){
-        return new ResponseEntity<Category>(categoryService.addCategory(addCategoryRequest), HttpStatus.CREATED);
+    public ResponseEntity<AddCategoryResponse> addCategory(@RequestBody AddCategoryRequest addCategoryRequest){
+        return new ResponseEntity<AddCategoryResponse>(categoryService.addCategory(addCategoryRequest), HttpStatus.CREATED);
     }
 }

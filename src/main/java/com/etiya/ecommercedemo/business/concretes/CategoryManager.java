@@ -2,6 +2,7 @@ package com.etiya.ecommercedemo.business.concretes;
 
 import com.etiya.ecommercedemo.business.abstracts.CategoryService;
 import com.etiya.ecommercedemo.business.dtos.request.category.AddCategoryRequest;
+import com.etiya.ecommercedemo.business.dtos.response.category.AddCategoryResponse;
 import com.etiya.ecommercedemo.core.entities.concretes.Category;
 import com.etiya.ecommercedemo.repository.abstracts.CategoryRepository;
 import lombok.AllArgsConstructor;
@@ -29,13 +30,20 @@ public class CategoryManager implements CategoryService {
 
     // JPA Repository SAVE methodu, eklenen veriyi geri döner.
     @Override
-    public Category addCategory(AddCategoryRequest addCategoryRequest) {
+    public AddCategoryResponse addCategory(AddCategoryRequest addCategoryRequest) {
         // MAPPING => AUTO MAPPER
         Category category = new Category();
         category.setName(addCategoryRequest.getName());
         category.setType(addCategoryRequest.getType());
         //
+        // Business Rules
+        // Validation
         Category savedCategory = categoryRepository.save(category);
-        return savedCategory;
+
+        // MAPPING -> Category => AddCategoryResponse
+        AddCategoryResponse response =
+                new AddCategoryResponse(savedCategory.getId(), savedCategory.getName(), savedCategory.getType());
+        //
+        return response;
     }
 }
