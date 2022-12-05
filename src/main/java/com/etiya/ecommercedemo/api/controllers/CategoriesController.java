@@ -1,11 +1,12 @@
 package com.etiya.ecommercedemo.api.controllers;
 
 import com.etiya.ecommercedemo.business.abstracts.CategoryService;
-import com.etiya.ecommercedemo.entities.concretes.Category;
+import com.etiya.ecommercedemo.business.dtos.request.category.AddCategoryRequest;
+import com.etiya.ecommercedemo.core.entities.concretes.Category;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,8 +16,20 @@ import java.util.List;
 public class CategoriesController {
     private CategoryService categoryService;
 
+    // GetCategoryResponse => id,name
     @GetMapping("")
     public List<Category> getAll(){
         return categoryService.getAll();
+    }
+
+
+    // client
+    // server
+    // DTO => Data Transfer Object
+    // AddCategoryRequest => name,type
+    // ResponseEntity
+    @PostMapping("/add")
+    public ResponseEntity<Category> addCategory(@RequestBody AddCategoryRequest addCategoryRequest){
+        return new ResponseEntity<Category>(categoryService.addCategory(addCategoryRequest), HttpStatus.CREATED);
     }
 }

@@ -1,7 +1,7 @@
 package com.etiya.ecommercedemo.business.concretes;
 
 import com.etiya.ecommercedemo.business.abstracts.ProductService;
-import com.etiya.ecommercedemo.entities.concretes.Product;
+import com.etiya.ecommercedemo.core.entities.concretes.Product;
 import com.etiya.ecommercedemo.repository.abstracts.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

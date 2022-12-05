@@ -1,6 +1,5 @@
-package com.etiya.ecommercedemo.entities.concretes;
+package com.etiya.ecommercedemo.core.entities.concretes;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
