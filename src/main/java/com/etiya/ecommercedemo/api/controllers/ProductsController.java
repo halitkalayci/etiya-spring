@@ -1,10 +1,12 @@
 package com.etiya.ecommercedemo.api.controllers;
 
 import com.etiya.ecommercedemo.business.abstracts.ProductService;
+import com.etiya.ecommercedemo.business.dtos.request.product.AddProductRequest;
 import com.etiya.ecommercedemo.core.entities.concretes.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -41,5 +43,10 @@ public class ProductsController {
     @GetMapping("/getByName")
     public Product getByName(@RequestParam("name") String name){
         return productService.getByName(name);
+    }
+
+    @PostMapping()
+    public Product add(@RequestBody @Valid AddProductRequest addProductRequest){
+        return productService.addProduct(addProductRequest);
     }
 }

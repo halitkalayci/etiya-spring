@@ -32,11 +32,15 @@ public class CategoryManager implements CategoryService {
     @Override
     public AddCategoryResponse addCategory(AddCategoryRequest addCategoryRequest) {
         // MAPPING => AUTO MAPPER
+        // TODO: Implement auto mapper.
         Category category = new Category();
         category.setName(addCategoryRequest.getName());
         category.setType(addCategoryRequest.getType());
         //
         // Business Rules
+        // Veritabanında aynı isimde iki kategori bulunamaz.
+        categoryCanNotExistWithSameName(addCategoryRequest.getName());
+
         // Validation
         Category savedCategory = categoryRepository.save(category);
 
@@ -45,5 +49,14 @@ public class CategoryManager implements CategoryService {
                 new AddCategoryResponse(savedCategory.getId(), savedCategory.getName(), savedCategory.getType());
         //
         return response;
+    }
+    private void categoryCanNotExistWithSameName(String name){
+        // Exception fırlatma
+       boolean isExists = categoryRepository.existsCategoryByName(name);
+       if(isExists) // Veritabanımda bu isimde bir kategori mevcut!!
+           // TODO: Add custom business exception.
+           // TODO: Remove magic string
+           // TODO: Add global exception handler
+           throw new RuntimeException("Bu isimle bir kategori zaten mevcut!");
     }
 }
