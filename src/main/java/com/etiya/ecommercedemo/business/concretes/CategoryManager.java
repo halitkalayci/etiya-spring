@@ -3,9 +3,11 @@ package com.etiya.ecommercedemo.business.concretes;
 import com.etiya.ecommercedemo.business.abstracts.CategoryService;
 import com.etiya.ecommercedemo.business.dtos.request.category.AddCategoryRequest;
 import com.etiya.ecommercedemo.business.dtos.response.category.AddCategoryResponse;
-import com.etiya.ecommercedemo.core.entities.concretes.Category;
+import com.etiya.ecommercedemo.core.util.mapping.ModelMapperService;
+import com.etiya.ecommercedemo.entities.concretes.Category;
 import com.etiya.ecommercedemo.repository.abstracts.CategoryRepository;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.List;
 public class CategoryManager implements CategoryService {
 
     private CategoryRepository categoryRepository;
+    private ModelMapperService modelMapperService;
 
     @Override
     public List<Category> getAll() {
@@ -32,10 +35,12 @@ public class CategoryManager implements CategoryService {
     @Override
     public AddCategoryResponse addCategory(AddCategoryRequest addCategoryRequest) {
         // MAPPING => AUTO MAPPER
-        // TODO: Implement auto mapper.
-        Category category = new Category();
-        category.setName(addCategoryRequest.getName());
-        category.setType(addCategoryRequest.getType());
+           // MANUAL MAPPING
+           // Category category = new Category();
+           // category.setName(addCategoryRequest.getName());
+           // category.setType(addCategoryRequest.getType());
+           //
+        Category category = modelMapperService.getMapper().map(addCategoryRequest,Category.class);
         //
         // Business Rules
         // Veritabanında aynı isimde iki kategori bulunamaz.
@@ -44,10 +49,7 @@ public class CategoryManager implements CategoryService {
         // Validation
         Category savedCategory = categoryRepository.save(category);
 
-        // MAPPING -> Category => AddCategoryResponse
-        AddCategoryResponse response =
-                new AddCategoryResponse(savedCategory.getId(), savedCategory.getName(), savedCategory.getType());
-        //
+        AddCategoryResponse response = modelMapperService.getMapper().map(savedCategory,AddCategoryResponse.class);
         return response;
     }
     private void categoryCanNotExistWithSameName(String name){

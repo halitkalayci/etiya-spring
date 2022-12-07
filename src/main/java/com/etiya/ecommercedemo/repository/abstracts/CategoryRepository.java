@@ -1,6 +1,6 @@
 package com.etiya.ecommercedemo.repository.abstracts;
 
-import com.etiya.ecommercedemo.core.entities.concretes.Category;
+import com.etiya.ecommercedemo.entities.concretes.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

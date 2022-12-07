@@ -23,7 +23,14 @@ public class AddProductRequest {
     @Min(value=0,message = "Stok adeti 0'dan küçük olamaz.")
     private int stock;
 
-    private int category_id;
+    // Product => Category
+    // categoryId
+    // categoryName
+    // PRODUCT => CATEGORY => ID, NAME
+    private int categoryId;
 
+    // categoryId => "" ""
+    // categoryName => product.category.name = ""
+    // categoryType => product.category.type = ""
     private double product_rating;
 }

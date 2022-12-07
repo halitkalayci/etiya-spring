@@ -3,7 +3,7 @@ package com.etiya.ecommercedemo.api.controllers;
 import com.etiya.ecommercedemo.business.abstracts.CategoryService;
 import com.etiya.ecommercedemo.business.dtos.request.category.AddCategoryRequest;
 import com.etiya.ecommercedemo.business.dtos.response.category.AddCategoryResponse;
-import com.etiya.ecommercedemo.core.entities.concretes.Category;
+import com.etiya.ecommercedemo.entities.concretes.Category;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

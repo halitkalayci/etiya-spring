@@ -1,7 +1,7 @@
 package com.etiya.ecommercedemo.business.abstracts;
 
 import com.etiya.ecommercedemo.business.dtos.request.product.AddProductRequest;
-import com.etiya.ecommercedemo.core.entities.concretes.Product;
+import com.etiya.ecommercedemo.entities.concretes.Product;
 
 import java.util.List;
 
