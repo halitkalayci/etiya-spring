@@ -24,7 +24,7 @@ public class Product {
     private String name;
 
     @Column(name="unit_price")
-    private double unit_price;
+    private double unitPrice;
 
     @Column(name="stock")
     private int stock;
@@ -36,6 +36,9 @@ public class Product {
     @JoinColumn(name="category_id")
     @JsonIgnoreProperties("products")
     private Category category;
+
+    // category_id
+    // category
 }
 
 // Http Request - Http Response araştırınız ve ikisi için de ayrı iki medium yazısı oluşturunuz. => Kişisel ÖDEV

@@ -31,7 +31,7 @@ public class ProductManager implements ProductService {
 
     @Override
     public List<Product> getAllByStockGreaterThan(int stock) {
-        return productRepository.findAllProductsByStockGreaterThanOrderByStockDesc(stock);
+        return productRepository.findByStockGreaterThan(stock);
     }
 
     @Override
@@ -54,5 +54,25 @@ public class ProductManager implements ProductService {
 
         Product product = modelMapperService.getMapper().map(addProductRequest,Product.class);
         return productRepository.save(product);
+    }
+
+    @Override
+    public List<Product> getAllByUnitPriceGreaterThan(double unitPrice) {
+        return productRepository.findByUnitPriceGreaterThan(unitPrice);
+    }
+
+    @Override
+    public List<Product> getAllOrderByStock() {
+        return productRepository.findAllByOrderByStock();
+    }
+
+    @Override
+    public List<Product> findByExample() {
+        return productRepository.findByExample();
+    }
+
+    @Override
+    public List<Product> findByCategoryId(int category_id) {
+        return productRepository.findAllByCategory_Id(category_id);
     }
 }

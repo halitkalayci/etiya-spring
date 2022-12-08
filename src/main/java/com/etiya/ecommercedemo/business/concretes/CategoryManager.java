@@ -1,6 +1,7 @@
 package com.etiya.ecommercedemo.business.concretes;
 
 import com.etiya.ecommercedemo.business.abstracts.CategoryService;
+import com.etiya.ecommercedemo.business.constants.Messages;
 import com.etiya.ecommercedemo.business.dtos.request.category.AddCategoryRequest;
 import com.etiya.ecommercedemo.business.dtos.response.category.AddCategoryResponse;
 import com.etiya.ecommercedemo.core.util.mapping.ModelMapperService;
@@ -57,8 +58,7 @@ public class CategoryManager implements CategoryService {
        boolean isExists = categoryRepository.existsCategoryByName(name);
        if(isExists) // Veritabanımda bu isimde bir kategori mevcut!!
            // TODO: Add custom business exception.
-           // TODO: Remove magic string
            // TODO: Add global exception handler
-           throw new RuntimeException("Bu isimle bir kategori zaten mevcut!");
+           throw new RuntimeException(Messages.Category.CategoryExistsWithSameName);
     }
 }

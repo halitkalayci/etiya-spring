@@ -17,7 +17,33 @@ public interface ProductRepository extends JpaRepository<Product,Integer> {
     // default olarak native SQL DEĞİL!
     // JPQL
     // :parametreIsmi
+
+    // find-get
+    // By keywordü => sağına yazılan alana göre filtreleme
+    // BY-PROPERTY-{CONDITION}
+    // CONDITION yok ise => Otomatik olarak tam eşitlik arar
+    List<Product> findByStockGreaterThan(int stock);
+
+    List<Product> findByUnitPriceGreaterThan(double unitPrice);
+
+    // Order By => Sağına gelen property'e göre sıralar. asc-desc
+    // findAllBy
+    // orderBy
+    // property
+    List<Product> findAllByOrderByStock();
+
     @Query("Select p from Product as p WHERE name=:name")
     Product findByName(String name);
 
+    // nativeQuery = true ise JPQL değil SQL olarak yorumlanır.
+    //@Query(value = "Select * from products where unit_price < stock and product_rating > 3",nativeQuery = true)
+    @Query("Select p from Product as p where unitPrice < stock and product_rating > 3")
+    List<Product> findByExample();
+
+    @Query("Select p from Product p where category.id=:category_id")
+    //@Query(value = "Select * from products where category_id=:category_id",nativeQuery = true)
+    List<Product> findAllByCategory_Id(int category_id);
+
+
+    //TODO: Select dto from Query as JPQL
 }

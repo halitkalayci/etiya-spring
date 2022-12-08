@@ -11,4 +11,10 @@ public interface ProductService {
     List<Product> getAllByStockGreaterThan(int stock);
     Product getByName(String name);
     Product addProduct(AddProductRequest addProductRequest);
+
+    List<Product> getAllByUnitPriceGreaterThan(double unitPrice);
+    List<Product> getAllOrderByStock();
+
+    List<Product> findByExample();
+    List<Product> findByCategoryId(int category_id);
 }

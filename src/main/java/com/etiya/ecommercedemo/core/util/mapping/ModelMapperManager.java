@@ -21,6 +21,5 @@ public class ModelMapperManager implements ModelMapperService{
 
 
     // Request ve Response için configurationlar değişebilir.
-    /* TODO: iki fonksiyon oluştur: forRequest,forResponse request ve response için konfigürasyonları yapıp geriye modelMapper'i dönsün. */
 
 }
