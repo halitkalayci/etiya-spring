@@ -1,6 +1,7 @@
 package com.etiya.ecommercedemo.business.abstracts;
 
 import com.etiya.ecommercedemo.business.dtos.request.product.AddProductRequest;
+import com.etiya.ecommercedemo.business.dtos.response.product.ListProductResponse;
 import com.etiya.ecommercedemo.entities.concretes.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,4 +25,6 @@ public interface ProductService {
     Page<Product> findAllWithPagination(Pageable pageable);
 
     Slice<Product> findAllWithSlice(Pageable pageable);
+
+    Page<ListProductResponse> findAllWithPaginationDto(Pageable pageable);
 }

@@ -3,6 +3,7 @@ package com.etiya.ecommercedemo.api.controllers;
 import com.etiya.ecommercedemo.business.abstracts.ProductService;
 import com.etiya.ecommercedemo.business.constants.Paths;
 import com.etiya.ecommercedemo.business.dtos.request.product.AddProductRequest;
+import com.etiya.ecommercedemo.business.dtos.response.product.ListProductResponse;
 import com.etiya.ecommercedemo.entities.concretes.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -85,5 +86,13 @@ public class ProductsController {
     public Slice<Product> getWithSlice(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize){
         Pageable pageable = PageRequest.of(page,pageSize);
         return productService.findAllWithSlice(pageable);
+    }
+
+    @GetMapping("/getWithPaginationDto")
+    // RequestParam => page,pageSize
+    public Page<ListProductResponse>
+                getWithPaginationDto(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize){
+        Pageable pageable = PageRequest.of(page,pageSize);
+        return productService.findAllWithPaginationDto(pageable);
     }
 }

@@ -3,6 +3,7 @@ package com.etiya.ecommercedemo.business.concretes;
 import com.etiya.ecommercedemo.business.abstracts.CategoryService;
 import com.etiya.ecommercedemo.business.abstracts.ProductService;
 import com.etiya.ecommercedemo.business.dtos.request.product.AddProductRequest;
+import com.etiya.ecommercedemo.business.dtos.response.product.ListProductResponse;
 import com.etiya.ecommercedemo.core.util.mapping.ModelMapperService;
 import com.etiya.ecommercedemo.entities.concretes.Product;
 import com.etiya.ecommercedemo.repository.abstracts.ProductRepository;
@@ -87,5 +88,10 @@ public class ProductManager implements ProductService {
     @Override
     public Slice<Product> findAllWithSlice(Pageable pageable) {
         return productRepository.getAllWithSlice(pageable);
+    }
+
+    @Override
+    public Page<ListProductResponse> findAllWithPaginationDto(Pageable pageable) {
+        return productRepository.getAllListProducts(pageable);
     }
 }
