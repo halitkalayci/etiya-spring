@@ -5,6 +5,10 @@ import com.etiya.ecommercedemo.business.constants.Paths;
 import com.etiya.ecommercedemo.business.dtos.request.product.AddProductRequest;
 import com.etiya.ecommercedemo.entities.concretes.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -67,5 +71,19 @@ public class ProductsController {
     @PostMapping()
     public Product add(@RequestBody @Valid AddProductRequest addProductRequest){
         return productService.addProduct(addProductRequest);
+    }
+
+    @GetMapping("/getWithPagination")
+    // RequestParam => page,pageSize
+    public Page<Product> getWithPagination(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize){
+        Pageable pageable = PageRequest.of(page,pageSize);
+        return productService.findAllWithPagination(pageable);
+    }
+
+    @GetMapping("/getWithSlice")
+    // RequestParam => page,pageSize
+    public Slice<Product> getWithSlice(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize){
+        Pageable pageable = PageRequest.of(page,pageSize);
+        return productService.findAllWithSlice(pageable);
     }
 }

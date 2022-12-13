@@ -1,6 +1,8 @@
 package com.etiya.ecommercedemo.repository.abstracts;
 
 import com.etiya.ecommercedemo.entities.concretes.Product;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -46,4 +48,6 @@ public interface ProductRepository extends JpaRepository<Product,Integer> {
 
 
     //TODO: Select dto from Query as JPQL
+    @Query("Select p from Product as p")
+    Slice<Product> getAllWithSlice(Pageable pageable);
 }

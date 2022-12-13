@@ -8,6 +8,9 @@ import com.etiya.ecommercedemo.entities.concretes.Product;
 import com.etiya.ecommercedemo.repository.abstracts.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -74,5 +77,15 @@ public class ProductManager implements ProductService {
     @Override
     public List<Product> findByCategoryId(int category_id) {
         return productRepository.findAllByCategory_Id(category_id);
+    }
+
+    @Override
+    public Page<Product> findAllWithPagination(Pageable pageable) {
+        return productRepository.findAll(pageable);
+    }
+
+    @Override
+    public Slice<Product> findAllWithSlice(Pageable pageable) {
+        return productRepository.getAllWithSlice(pageable);
     }
 }
