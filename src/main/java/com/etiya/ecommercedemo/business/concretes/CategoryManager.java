@@ -10,6 +10,8 @@ import com.etiya.ecommercedemo.entities.concretes.Category;
 import com.etiya.ecommercedemo.repository.abstracts.CategoryRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +22,7 @@ public class CategoryManager implements CategoryService {
 
     private CategoryRepository categoryRepository;
     private ModelMapperService modelMapperService;
+    private MessageSource messageSource;
 
     @Override
     public List<Category> getAll() {
@@ -59,6 +62,9 @@ public class CategoryManager implements CategoryService {
        boolean isExists = categoryRepository.existsCategoryByName(name);
        if(isExists) // Veritabanımda bu isimde bir kategori mevcut!!
            // TODO: Change all business rules to throw BusinessException
-           throw new BusinessException(Messages.Category.CategoryExistsWithSameName);
+           throw new BusinessException(
+                   messageSource.getMessage
+                           (Messages.Category.CategoryExistsWithSameName,null, LocaleContextHolder.getLocale())
+           );
     }
 }
