@@ -26,7 +26,7 @@ public class ProductManager implements ProductService {
     private ProductRepository productRepository;
     // CategoryService,
     private CategoryService categoryService;
-    private CategoryRepository categoryRepository;
+
     private ModelMapperService modelMapperService;
     @Override
     public List<Product> getAll() {
@@ -69,7 +69,7 @@ public class ProductManager implements ProductService {
                 .name("Deneme Transaction")
                 .type("Deneme Type")
                 .build();
-        categoryRepository.save(category);
+
         // submitOrder() -> List<Product> -> KullanıcıId
         // Kullanıcının sepetini getir
         // Sepetteki tüm ürünleri getir.
