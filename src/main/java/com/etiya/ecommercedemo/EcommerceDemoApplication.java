@@ -38,6 +38,9 @@ public class EcommerceDemoApplication {
 		// Dosyadan çekme işlemi..
 		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
 		// Konfigurasyonlar
+		// Veritabanına git
+		// Select * from Languages Where code='tr' and key='greetings'
+		// isteğinden dönen cevap senin çevirindir.
 		messageSource.setBasename("messages");
 		//
 		return messageSource;
@@ -47,7 +50,10 @@ public class EcommerceDemoApplication {
 	// Accept-Language
 	@Bean
 	public LocaleResolver localeResolver(){
+		//Session,Cookie
+		// Header => Her istekte headerda bir değer varsa bunu baz al.
 		AcceptHeaderLocaleResolver localeResolver = new AcceptHeaderLocaleResolver();
+		// Accept-Language alanı boş ise default olarak 'US' alanı olarak değerlendir.
 		localeResolver.setDefaultLocale(Locale.US);
 		return localeResolver;
 	}

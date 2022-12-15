@@ -1,10 +1,7 @@
 package com.etiya.ecommercedemo.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,6 +12,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Category {
     @Id
     @Column(name="id")
@@ -30,4 +28,5 @@ public class Category {
     @OneToMany(mappedBy = "category")
     @JsonIgnoreProperties("category")
     private List<Product> products;
+
 }
