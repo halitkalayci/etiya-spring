@@ -1,5 +1,7 @@
 package com.etiya.ecommercedemo.business.concretes;
 
+import com.etiya.ecommercedemo.business.dtos.request.category.AddCategoryRequest;
+import com.etiya.ecommercedemo.business.dtos.response.category.AddCategoryResponse;
 import com.etiya.ecommercedemo.core.util.exceptions.BusinessException;
 import com.etiya.ecommercedemo.core.util.mapping.ModelMapperManager;
 import com.etiya.ecommercedemo.core.util.mapping.ModelMapperService;
@@ -17,6 +19,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -36,9 +39,14 @@ class CategoryManagerTest {
         // Mocking - Mockito
         categoryRepository = mock(CategoryRepository.class);
         modelMapperService = new ModelMapperManager(new ModelMapper());
-        messageSource = new ResourceBundleMessageSource();
-
+        messageSource = getResourceBundle();
         categoryManager = new CategoryManager(categoryRepository,modelMapperService,messageSource);
+    }
+
+    ResourceBundleMessageSource getResourceBundle(){
+        ResourceBundleMessageSource source = new ResourceBundleMessageSource();
+        source.setBasename("messages");
+        return source;
     }
 
     @Test
@@ -73,6 +81,20 @@ class CategoryManagerTest {
 
     @Test
     void addCategory() {
+        when(categoryRepository.existsCategoryByName(any())).thenReturn(false);
+        AddCategoryRequest addCategoryRequest = new AddCategoryRequest("Kategori 1","Giyim");
+        Category categoryToAdd = Category.builder().name("Kategori 1").type("Giyim").build();
+        when(categoryRepository.save(any())).thenReturn(categoryToAdd);
+        AddCategoryResponse response = categoryManager.addCategory(addCategoryRequest);
+        assert response.getName() == categoryToAdd.getName();
+    }
 
+    @Test
+    void addCategoryWithSameName_ShouldThrowBusinessException(){
+        when(categoryRepository.existsCategoryByName(any())).thenReturn(true);
+        AddCategoryRequest addCategoryRequest = new AddCategoryRequest("Kategori 1","Giyim");
+        assertThrows(BusinessException.class, ()->{
+           categoryManager.addCategory(addCategoryRequest);
+        });
     }
 }
