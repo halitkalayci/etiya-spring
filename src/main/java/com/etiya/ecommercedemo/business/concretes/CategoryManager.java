@@ -33,7 +33,7 @@ public class CategoryManager implements CategoryService {
 
     @Override
     public Category getById(int id) {
-        return categoryRepository.findById(id).orElseThrow();
+        return categoryRepository.findById(id).orElseThrow(() -> new BusinessException("Böyle bir kategori yok.."));
     }
 
     // JPA Repository SAVE methodu, eklenen veriyi geri döner.
